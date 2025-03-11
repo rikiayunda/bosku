@@ -102,13 +102,28 @@ class DepositController extends Controller
     }
 
     public function delete($id)
-    {
-        $deposit = $this->modelDeposit->find($id);
-        if (!$deposit) {
-            return redirect()->to(base_url('admin/deposit'))->with('error', 'Deposit tidak ditemukan.');
-        }
+{
+    $db = \Config\Database::connect();
+    $db->transStart(); // Mulai transaksi database
 
-        $this->modelDeposit->delete($id);
-        return redirect()->to(base_url('admin/deposit'))->with('message', 'Riwayat deposit dihapus.');
+    $deposit = $this->modelDeposit->find($id);
+    if (!$deposit) {
+        return redirect()->to(base_url('admin/deposit'))->with('error', 'Deposit tidak ditemukan.');
     }
+
+    // Hapus transaksi terkait jika ada
+    $this->transactionModel
+        ->where('user_id', $deposit['user_id'])
+        ->where('amount', $deposit['nominal'])
+        ->where('type', 'deposit')
+        ->delete();
+
+    // Hapus deposit
+    $this->modelDeposit->delete($id);
+
+    $db->transComplete(); // Commit transaksi jika sukses
+
+    return redirect()->to(base_url('admin/deposit'))->with('message', 'Riwayat deposit dihapus.');
+}
+
 }
