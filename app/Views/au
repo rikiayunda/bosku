@@ -1,0 +1,134 @@
+
+
+public function edit($id)
+    {
+        $userModel = new UserModel();
+        $data['user'] = $userModel->find($id);
+        var_dump($data['user']);
+        exit; // Remove this line after debugging
+        return view('edit_user', $data);
+    }
+
+    public function update($id)
+    {
+        $userModel = new UserModel();
+
+        $data = [
+            'full_name'  => $this->request->getPost('full_name'),
+            'phone'      => $this->request->getPost('phone'),
+            'email'      => $this->request->getPost('email'),
+            'username'   => $this->request->getPost('username'),
+            'skin'       => $this->request->getPost('skin'),
+            'level'      => $this->request->getPost('level'),
+            'photo'      => $this->request->getPost('photo'),
+            'updated_at' => date('Y-m-d H:i:s'),
+        ];
+
+        // Update password jika diisi
+        if ($this->request->getPost('password')) {
+            $data['password'] = password_hash($this->request->getPost('password'), PASSWORD_DEFAULT);
+        }
+        // var_dump($data['user']);
+        // exit; 
+        $userModel->update($id, $data);
+        return redirect()->to('/manage_users');
+    }
+
+    // update profile
+
+    // update profile
+    public function profile()
+    {
+        $id = session()->get('id'); // Mengambil ID pengguna dari session
+
+        // Ambil data pengguna berdasarkan ID
+        $user = $this->UserModel->find($id);
+
+
+        // Cek jika pengguna tidak ditemukan
+        if (!$user) {
+            return redirect()->to('/login')->with('error', 'User not found. Please log in again.');
+        }
+
+        // Kirim data pengguna ke view
+        $data = [
+            'title' => 'Profile',
+            'isi' => 'profile',
+            'user' => $user
+        ];
+
+        return view('layout/v_wrapper', $data); // View 'profile' menampilkan form profile
+    }
+
+
+    // Method to fetch user data as JSON
+    public function getUserData()
+    {
+        $id = session()->get('id'); // Get user ID from session
+        $user = $this->UserModel->find($id); // Fetch user data from the database
+
+        // Check if user data is found
+        if (!$user) {
+            return $this->response->setJSON(['error' => 'User not found']);
+        }
+
+        return $this->response->setJSON($user); // Return user data as JSON
+    }
+
+
+    // Fungsi untuk update profile
+    public function updateProfile()
+    {
+        $id = session()->get('id'); // Mengambil ID pengguna dari session
+
+        // Validasi form input
+        $validation = $this->validate([
+            'full_name' => 'required',
+            'email'     => 'required|valid_email',
+            'phone'     => 'required',
+            'username'  => 'required',
+            'photo'     => 'mime_in[photo,image/jpg,image/jpeg,image/png]|max_size[photo,2048]', // Optional photo upload validation
+            'password'  => 'permit_empty|min_length[8]',
+            'skin'      => 'required',
+            'level'     => 'required',
+            'status'    => 'required',
+        ]);
+
+        if (!$validation) {
+            return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
+        }
+
+        // Jika ada file photo yang di-upload
+        $photo = $this->request->getFile('photo');
+        if ($photo && $photo->isValid() && !$photo->hasMoved()) {
+            $newPhotoName = $photo->getRandomName();
+            $photo->move('uploads/', $newPhotoName);
+        } else {
+            $newPhotoName = $this->request->getVar('current_photo'); // Tetap menggunakan photo yang lama
+        }
+
+        // Ambil data inputan dan update ke database
+        $dataToUpdate = [
+            'full_name' => $this->request->getVar('full_name'),
+            'email'     => $this->request->getVar('email'),
+            'phone'     => $this->request->getVar('phone'),
+            'username'  => $this->request->getVar('username'),
+            'photo'     => $newPhotoName,
+            'skin'      => $this->request->getVar('skin'), // Include skin if needed
+            'level'     => $this->request->getVar('level'), // Ensure you set this if applicable
+            'status'    => $this->request->getVar('status'), // Ensure you handle this if needed
+            'updated_at' => date('Y-m-d H:i:s'), // Update the timestamp
+        ];
+
+        // Handle password update
+        if ($this->request->getVar('password')) {
+            $dataToUpdate['password'] = password_hash($this->request->getVar('password'), PASSWORD_DEFAULT);
+        }
+
+        // Perform the update dengan menggunakan where clause
+        if (!$this->UserModel->update($id, $dataToUpdate)) {
+            return redirect()->back()->withInput()->with('errors', ['Failed to update profile.']);
+        }
+
+        return redirect()->to('/profile')->with('success', 'Profile updated successfully.');
+    }

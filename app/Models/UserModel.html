@@ -1,0 +1,19 @@
+<?php
+namespace App\Models;
+
+use CodeIgniter\Model;
+
+class UserModel extends Model
+{
+    protected $table = 'users';
+    protected $primaryKey = 'id';
+    protected $allowedFields = [
+        'full_name', 'phone', 'email', 'username', 'password', 
+        'skin', 'level', 'registered_at', 'photo'
+    ];
+
+    protected $useTimestamps = true; // To handle created_at and updated_at automatically
+    protected $createdField = 'created_at';
+    protected $updatedField = 'updated_at';
+    protected $returnType = 'array';
+}
