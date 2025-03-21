@@ -62,7 +62,7 @@
                 <!-- Sent Messages/Pesan Keluar -->
                 <li class="nav-item">
                     <a href="<?= base_url('home-pelanggan') ?>" class="nav-link">
-                        <i class="nav-icon fas fa-paper-plane"></i>
+                    <i class="nav-icon fas fa-shopping-bag"></i>  <!-- Tas belanja -->
                         <p>Mission</p>
                     </a>
                 </li>
@@ -73,6 +73,20 @@
                         <p>Transaksi</p>
                     </a>
                 </li>
+                <?php if (session()->get('level') == 1): ?>
+                <li class="nav-item">
+                    <a href="<?= base_url('admin/deposit') ?>" class="nav-link">
+                        <i class="nav-icon fas fa-wallet"></i>
+                        <p>Kelola Deposit</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?= base_url('admin/products') ?>" class="nav-link">
+                        <i class="nav-icon fas fa-store"></i> <!-- Toko -->
+                        <p>Kelola Products</p>
+                    </a>
+                </li>
+                <?php endif; ?>
 
                 <!-- Inbox/Pesan Masuk -->
                 <!-- <li class="nav-item">
