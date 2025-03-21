@@ -101,5 +101,15 @@ $routes->group('admin', ['filter' => 'filteradmin'], function ($routes) {
     $routes->post('deposit/reject/(:num)', 'Admin\DepositController::reject/$1');
     $routes->post('deposit/mass_action', 'Admin\DepositController::mass_action');
 });
-
+$routes->group('admin', ['namespace' => 'App\Controllers\Admin', 'filter' => 'filteradmin'], function ($routes) {
+    $routes->get('products', 'ProductsController::index'); 
+    $routes->get('products/create', 'ProductsController::create'); // Halaman tambah produk
+    $routes->post('products/store', 'ProductsController::store'); // Menyimpan produk baru
+    $routes->get('products/edit/(:num)', 'ProductsController::edit/$1'); // Halaman edit produk
+    $routes->post('products/update/(:num)', 'ProductsController::update/$1'); // Proses update produk
+    $routes->get('products/delete/(:num)', 'ProductsController::delete/$1'); // Hapus produk
+});
+// $routes->group('admin', ['namespace' => 'App\Controllers\Admin'], function ($routes) {
+//     $routes->get('products', 'ProductsController::index'); 
+// });
 

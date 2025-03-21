@@ -83,88 +83,138 @@ class Filters extends BaseFilters
         'before' => [
             'csrf',
             'filteradmin' =>  ['except' => [
-                'auth', 'auth/*',
-                'web', 'web/*',
-                'lupa_password', 'lupa_password/*',
+                'auth',
+                'auth/*',
+                'web',
+                'web/*',
+                'lupa_password',
+                'lupa_password/*',
                 'transaksi',
                 '/',
-                ]],
+            ]],
             'filteruser' =>  ['except' => [
-                'auth', 'auth/*',
-                'web', 'web/*',
-                'lupa_password', 'lupa_password/*',
+                'auth',
+                'auth/*',
+                'web',
+                'web/*',
+                'lupa_password',
+                'lupa_password/*',
                 '/',
-                ]],
+            ]],
             'filterpelanggan' =>  ['except' => [
-                'auth', 'auth/*',
-                'web', 'web/*',
-                'lupa_password', 'lupa_password/*',
-                 
-               
+                'auth',
+                'auth/*',
+                'web',
+                'web/*',
+                'lupa_password',
+                'lupa_password/*',
+
+
                 '/',
-                
-                ]],
+
+            ]],
             // 'honeypot',
             // 'csrf',
             // 'invalidchars',
         ],
-        'after' =>[
+        'after' => [
             'filteradmin' =>  ['except' => [
-                'home', 'home/*',
-                'admin', 'admin/*',
-                'dashboard', 'dashboard/*',
-                'message', 'message/*',
-                'messages/detail/',  'messages/detail/*',
-                '/messages/reply/',  'messages/reply/*',
-                '/messages/new',  'messages/new*',
+                'home',
+                'home/*',
+                'admin',
+                'admin/*',
+                'dashboard',
+                'dashboard/*',
+                'message',
+                'message/*',
+                'messages/detail/',
+                'messages/detail/*',
+                '/messages/reply/',
+                'messages/reply/*',
+                '/messages/new',
+                'messages/new*',
 
                 // ManageUser
-                '/manage_users',  '/manage_users*',
-                '/manage_users/create',  '/manage_users/create*',
-                '/manage_users/store',  '/manage_users/store*',
-                '/manage_users/edit/(:num)',  '/manage_users/edit/(:num)*',
-                '/manage_users/update/(:num)',  '/manage_users/update/(:num)*',
-                '/manage_users/delete/(:num)',  '/manage_users/delete/(:num)*',
+                '/manage_users',
+                '/manage_users*',
+                '/manage_users/create',
+                '/manage_users/create*',
+                '/manage_users/store',
+                '/manage_users/store*',
+                '/manage_users/edit/(:num)',
+                '/manage_users/edit/(:num)*',
+                '/manage_users/update/(:num)',
+                '/manage_users/update/(:num)*',
+                '/manage_users/delete/(:num)',
+                '/manage_users/delete/(:num)*',
 
                 // profile
-                '/profile',  '/profile*',
-                '/profile/update',  '/profile/update*',
+                '/profile',
+                '/profile*',
+                '/profile/update',
+                '/profile/update*',
 
                 //contact
-                '/contacts', '/contacts/*',
-                '/contacts/store','/contacts/store/*',
-                'admin/deposit', 'admin/deposit/*',
-                
-                
+                '/contacts',
+                '/contacts/*',
+                '/contacts/store',
+                '/contacts/store/*',
+                'admin/deposit',
+                'admin/deposit/*',
 
-                
+                // produk
+                'products',
+                'products/create',
+                'products/store',
+                'products/edit/(:num)',
+                'products/update/(:num)',
+                'products/delete/(:num)',
+
+
+
+
 
                 // 'profile',  'profile/*',
                 //  '/profile/update',  'profile/update/*', 
-                
-                'test', 'test/*',
-                ]],
+
+                'test',
+                'test/*',
+            ]],
             'filteruser' =>  ['except' => [
-                'home', 'home/*',
-                'user', 'user/*',
-                'dashboard', 'dashboard/*',
-                'message', 'message/*',
+                'home',
+                'home/*',
+                'user',
+                'user/*',
+                'dashboard',
+                'dashboard/*',
+                'message',
+                'message/*',
                 // 'admin', 'admin/*',
-                ]],
+            ]],
             'filterpelanggan' =>  ['except' => [
-                'home', 'home/*',
-                'pelanggan', 'pelanggan/*',
-                'dashboard', 'dashboard/*',
-                'message', 'message/*',
-                '/home-pelanggan','/home-pelanggan',
-                '/deposit','/deposit',
-                '/deposit/submit','deposit/submit',
-                '/deposit/success','deposit/success',
-                '/transaksi','transaksi',
-                '/login','login',
+                'home',
+                'home/*',
+                'pelanggan',
+                'pelanggan/*',
+                'dashboard',
+                'dashboard/*',
+                'message',
+                'message/*',
+                '/home-pelanggan',
+                '/home-pelanggan',
+                '/deposit',
+                '/deposit',
+                '/deposit/submit',
+                'deposit/submit',
+                '/deposit/success',
+                'deposit/success',
+                '/transaksi',
+                'transaksi',
+                '/login',
+                'login',
                 // 'admin', 'admin/*',
-                ]],
-                'toolbar',
+            ]],
+            'toolbar',
             // 'honeypot',
             // 'secureheaders',
         ],
@@ -196,6 +246,6 @@ class Filters extends BaseFilters
      */
     public array $filters = [
         'csrf' => ['except' => ['admin/deposit/mass_action']],
-        
+
     ];
 }
