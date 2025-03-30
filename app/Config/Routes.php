@@ -102,7 +102,7 @@ $routes->group('admin', ['filter' => 'filteradmin'], function ($routes) {
     $routes->post('deposit/mass_action', 'Admin\DepositController::mass_action');
 });
 $routes->group('admin', ['namespace' => 'App\Controllers\Admin', 'filter' => 'filteradmin'], function ($routes) {
-    $routes->get('products', 'ProductsController::index'); 
+    $routes->get('products', 'ProductsController::index');
     $routes->get('products/create', 'ProductsController::create'); // Halaman tambah produk
     $routes->post('products/store', 'ProductsController::store'); // Menyimpan produk baru
     $routes->get('products/edit/(:num)', 'ProductsController::edit/$1'); // Halaman edit produk
@@ -112,4 +112,27 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin', 'filter' => 'fi
 // $routes->group('admin', ['namespace' => 'App\Controllers\Admin'], function ($routes) {
 //     $routes->get('products', 'ProductsController::index'); 
 // });
+
+
+
+
+$routes->get('admin/bank', 'BankController::index');
+$routes->get('admin/bank/create', 'BankController::create');
+$routes->post('admin/bank/store', 'BankController::store');
+$routes->get('admin/bank/delete/(:num)', 'BankController::delete/$1');
+
+
+// $routes->get('checkout', 'Checkout::index'); 
+$routes->get('checkout/(:num)', 'Checkout::index/$1');
+
+// $routes->get('checkout/(:num)', 'Checkout::index/$1', ['filter' => 'none']);
+
+// $routes->get('checkout/(:segment)', 'Checkout::index/$1');
+// $routes->post('/checkout/process', 'Checkout::process');
+$routes->post('checkout/process', 'Checkout::process');
+
+$routes->post('/checkout/upload-payment', 'Checkout::uploadPayment');
+$routes->get('/checkout/invoice/(:num)', 'Checkout::invoice/$1');
+$routes->get('checkout/invoice/(:num)', 'Checkout::invoice/$1');
+$routes->get('checkout/invoice/download/(:num)', 'Checkout::downloadInvoice/$1');
 

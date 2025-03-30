@@ -108,6 +108,7 @@ class Filters extends BaseFilters
                 'web/*',
                 'lupa_password',
                 'lupa_password/*',
+                // 'checkout/(:num)',
 
 
                 '/',
@@ -170,6 +171,13 @@ class Filters extends BaseFilters
                 'products/update/(:num)',
                 'products/delete/(:num)',
 
+                //bank
+                '/bank',
+                '/bank/create',
+                '/bank/store',
+                '/bank/delete/(:num)',
+
+
 
 
 
@@ -212,6 +220,22 @@ class Filters extends BaseFilters
                 'transaksi',
                 '/login',
                 'login',
+                // 'checkout/(:num)',
+                'checkout',
+                'checkout/*',
+                'checkout/(:num)',
+                'checkout/process',
+                'checkout/upload-payment',
+                '/*',
+
+
+                // Tambahkan akses ke checkout
+                // 'checkout/(:num)/*','checkout/(:num)',
+                // 'checkout',
+                // 'checkout/*',
+                // 'checkout/process',
+                // 'checkout/upload-payment',
+
                 // 'admin', 'admin/*',
             ]],
             'toolbar',

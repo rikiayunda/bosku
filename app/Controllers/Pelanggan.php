@@ -15,4 +15,5 @@ class Pelanggan extends BaseController
         );
         return view('layout/v_wrapper',$data);
     }
+    
 }

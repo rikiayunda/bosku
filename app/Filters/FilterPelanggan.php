@@ -6,7 +6,7 @@ use CodeIgniter\Filters\FilterInterface;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 
-class filterpelanggan implements FilterInterface
+class FilterPelanggan implements FilterInterface
 {
     public function before(RequestInterface $request, $arguments = null)
     {
@@ -17,10 +17,16 @@ class filterpelanggan implements FilterInterface
     }
 
     public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)
-    {
+{
+    // Debugging: Lihat isi sesi
+    // d(session()->get()); exit;
 
-        if (session()->get('level') == 3) {
-            return redirect()->to(base_url('home'));
-        }
+    $allowedRoutes = ['checkout', 'checkout/process'];
+    $uri = service('uri')->getPath();
+
+    if (session()->get('level') == 3 && !in_array($uri, $allowedRoutes) && !str_starts_with($uri, 'checkout/')) {
+        return redirect()->to(base_url('home'));
     }
 }
+
+}    

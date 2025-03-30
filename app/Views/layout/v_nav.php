@@ -2,7 +2,7 @@
     <!-- Brand Logo -->
     <a href="<?= base_url() ?>" class="brand-link">
         <img src="<?= base_url() ?>/template/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3">
-        <span class="brand-text font-weight-light">Sidebar</span>
+        <span class="brand-text font-weight-light">Zona Belanja</span>
     </a>
 
     <!-- Sidebar -->
@@ -78,6 +78,12 @@
                     <a href="<?= base_url('admin/deposit') ?>" class="nav-link">
                         <i class="nav-icon fas fa-wallet"></i>
                         <p>Kelola Deposit</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?= base_url('/bank') ?>" class="nav-link">
+                        <i class="nav-icon fas fa-wallet"></i>
+                        <p>Bank Checkout</p>
                     </a>
                 </li>
                 <li class="nav-item">

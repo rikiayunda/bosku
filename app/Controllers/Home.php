@@ -3,12 +3,19 @@
 namespace App\Controllers;
 
 use App\Models\MessageModel;
+use App\Models\ProductModel;
 use App\Models\UserModel;
 use App\Models\ReplyModel;
 use App\Models\ContactModel;
 
 class Home extends BaseController
 {
+    protected $productModel;
+
+    public function __construct()
+    {
+        $this->productModel = new ProductModel(); // Inisialisasi model di dalam constructor
+    }
     public function index()
     {
         $data = array(
@@ -24,6 +31,7 @@ class Home extends BaseController
         $messageModel = new MessageModel();
         $UserModel = new UserModel();
         $ContactModel = new UserModel();
+        // $productModel = new ProductModel();
 
 
         // Menghitung total pesan masuk (misal berdasarkan status)
@@ -54,10 +62,13 @@ class Home extends BaseController
     }
     public function homePelanggan()
     {
-        $data = array(
+        $data = [
             'title' => 'Home Pelanggan',
-            'isi' => 'pelanggan/homePelanggan', // Pastikan Anda memiliki view dengan nama homePelanggan.php
-        );
+            'products' => $this->productModel->findAll(),
+            'isi' => 'pelanggan/homePelanggan', // Pastikan view ini ada di folder pelanggan
+        ];
+        
         return view('layout/v_wrapper', $data);
     }
+    
 }

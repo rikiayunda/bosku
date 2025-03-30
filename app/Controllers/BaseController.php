@@ -10,12 +10,21 @@ use Psr\Log\LoggerInterface;
 
 abstract class BaseController extends Controller
 {
+    public function __construct()
+{
+    helper('session');
+    if (session_status() == PHP_SESSION_NONE) {
+        session()->start();
+    }
+}
+
     /**
      * Instance of the main Request object.
      *
      * @var CLIRequest|IncomingRequest
      */
     protected $request;
+    
 
     /**
      * An array of helpers to be loaded automatically upon
@@ -34,10 +43,12 @@ abstract class BaseController extends Controller
         // Do Not Edit This Line
         parent::initController($request, $response, $logger);
 
-        // Memulai session jika belum dimulai
+        // Memulai session jika belum dimulai\
         if (session_status() === PHP_SESSION_NONE) {
             session()->start();
         }
+
+
 
         // Preload any models, libraries, etc, here.
         // E.g.: $this->session = \Config\Services::session();
