@@ -5,7 +5,8 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
-$routes->get('/', 'Web::index');
+$routes->get('/pesan', 'Web::index');
+$routes->get('/', 'Web::utama');
 $routes->get('/dashboard', 'Home::dashboard');
 $routes->get('/message', 'MessageController::message');
 $routes->get('messages/detail/(:num)', 'MessageController::detail/$1');
@@ -66,7 +67,7 @@ $routes->post('/contacts/store', 'MessageController::tambahcontact');
 
 // profile
 // Route untuk menampilkan halaman profile
-// $routes->get('/profile', 'UserManagement::profile');
+$routes->get('/profile', 'UserManagement::profile');
 
 // Route untuk meng-update profile
 $routes->post('/profile/update', 'UserManagement::updateProfile');
@@ -136,3 +137,31 @@ $routes->get('/checkout/invoice/(:num)', 'Checkout::invoice/$1');
 $routes->get('checkout/invoice/(:num)', 'Checkout::invoice/$1');
 $routes->get('checkout/invoice/download/(:num)', 'Checkout::downloadInvoice/$1');
 
+
+$routes->get('/admin/orders', 'AdminController::orders');
+$routes->get('/admin/approve-order/(:num)', 'AdminController::approveOrder/$1');
+$routes->post('admin/delete-order/(:num)', 'AdminController::deleteOrder/$1');
+$routes->post('admin/delete-all-orders', 'AdminController::deleteAllOrders');
+
+
+// $routes->post('admin/delete-order/(:num)', 'AdminController::deleteOrder/$1');  
+$routes->post('admin/bulk-action', 'AdminController::bulkAction');
+
+
+$routes->get('admin/edit-saldo/(:num)', 'AdminController::editSaldo/$1');
+$routes->post('admin/update-saldo', 'AdminController::updateSaldo');
+$routes->post('admin/reset-saldo', 'AdminController::resetSaldo');
+
+
+$routes->get('admin/change-password/(:num)', 'AdminController::changePassword/$1');
+$routes->post('admin/update-password', 'AdminController::updatePassword');
+
+
+$routes->get('/withdrawal', 'WithdrawalController::index');
+$routes->post('/withdrawal/store', 'WithdrawalController::store');
+
+// $routes->group('admin', ['namespace' => 'App\Controllers\Admin', 'filter' => 'filteradmin'], function ($routes) {
+    $routes->get('/admin/withdrawals', 'admin\WithdrawalController::index');
+    $routes->get('/admin/withdrawals/approve/(:num)', 'admin\WithdrawalController::approve/$1');
+    $routes->post('/admin/withdrawals/uploadProof/(:num)', 'admin\WithdrawalController::uploadProof/$1');
+    $routes->get('/admin/withdrawals/delete/(:num)', 'admin\WithdrawalController::delete/$1');

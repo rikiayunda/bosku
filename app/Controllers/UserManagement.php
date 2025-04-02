@@ -186,7 +186,7 @@ class UserManagement extends BaseController
     
         if ($user_get) {
             $data = [
-                'title'    => 'Ubah Data User',
+                'title'    => 'Ubah profil',
                 'isi'      => 'manageuser/ubahUser',
                 'user_get' => $user_get,
             ];

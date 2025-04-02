@@ -176,7 +176,13 @@ class Filters extends BaseFilters
                 '/bank/create',
                 '/bank/store',
                 '/bank/delete/(:num)',
+                '/admin/orders',
+                '/admin/approve-order/(:num)',
 
+                '/admin/withdrawals',
+                '/admin/withdrawals/approve/(:num)',
+                '/admin/withdrawals/uploadProof/(:num)',
+                '/admin/withdrawals/delete/(:num)',
 
 
 
@@ -227,6 +233,14 @@ class Filters extends BaseFilters
                 'checkout/process',
                 'checkout/upload-payment',
                 '/*',
+                'admin/edit-saldo/(:num)',
+
+                '/withdrawal',
+                '/withdrawal/store',
+
+
+
+                
 
 
                 // Tambahkan akses ke checkout

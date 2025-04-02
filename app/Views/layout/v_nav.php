@@ -45,53 +45,83 @@
 
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" role="menu" data-accordion="false">
-                <li class="nav-item">
-                    <a href="<?= base_url('dashboard') ?>" class="nav-link">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
-                        <p>Dashboard</p>
-                    </a>
-                </li>
+                <?php if (session()->get('level') == 3): ?>
+                    <li class="nav-item">
+                        <a href="<?= base_url('dashboard') ?>" class="nav-link">
+                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <p>Dashboard</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="<?= base_url('home-pelanggan') ?>" class="nav-link">
+                            <i class="nav-icon fas fa-bullseye"></i> <!-- Ikon target untuk misi -->
+                            <p>Mission</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="<?= base_url('withdrawal') ?>" class="nav-link">
+                            <i class="nav-icon fas fa-hand-holding-usd"></i> <!-- Ikon pencairan dana -->
+                            <p>Tarik Saldo</p>
+                        </a>
+                    </li>
 
-                <li class="nav-item">
+                    </li>
+
+                    <!-- <li class="nav-item">
                     <a href="<?= base_url('deposit') ?>" class="nav-link">
                         <i class="nav-icon fas fa-envelope"></i>
                         <p>Deposit</p>
                     </a>
-                </li>
+                </li> -->
 
-                <!-- Sent Messages/Pesan Keluar -->
-                <li class="nav-item">
-                    <a href="<?= base_url('home-pelanggan') ?>" class="nav-link">
-                    <i class="nav-icon fas fa-shopping-bag"></i>  <!-- Tas belanja -->
-                        <p>Mission</p>
-                    </a>
-                </li>
+                    <!-- Sent Messages/Pesan Keluar -->
 
-                <li class="nav-item">
+                <?php endif; ?>
+
+                <!-- <li class="nav-item">
                     <a href="<?= base_url('transaksi') ?>" class="nav-link">
                         <i class="nav-icon fas fa-credit-card"></i>
                         <p>Transaksi</p>
                     </a>
-                </li>
+                </li> -->
                 <?php if (session()->get('level') == 1): ?>
-                <li class="nav-item">
-                    <a href="<?= base_url('admin/deposit') ?>" class="nav-link">
-                        <i class="nav-icon fas fa-wallet"></i>
-                        <p>Kelola Deposit</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="<?= base_url('/bank') ?>" class="nav-link">
-                        <i class="nav-icon fas fa-wallet"></i>
-                        <p>Bank Checkout</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="<?= base_url('admin/products') ?>" class="nav-link">
-                        <i class="nav-icon fas fa-store"></i> <!-- Toko -->
-                        <p>Kelola Products</p>
-                    </a>
-                </li>
+                    <!-- <li class="nav-item">
+                        <a href="<?= base_url('admin/deposit') ?>" class="nav-link">
+                            <i class="nav-icon fas fa-wallet"></i>
+                            <p>Kelola Deposit</p>
+                        </a>
+                    </li> -->
+                    <li class="nav-item">
+                        <a href="<?= base_url('admin/bank') ?>" class="nav-link">
+                            <i class="nav-icon fas fa-university"></i> <!-- Ikon bank -->
+                            <p>Bank Checkout</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="<?= base_url('admin/products') ?>" class="nav-link">
+                            <i class="nav-icon fas fa-store"></i> <!-- Toko -->
+                            <p>Kelola Products</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="<?= base_url('/admin/orders') ?>" class="nav-link">
+                            <i class="nav-icon fas fa-clipboard-list"></i> <!-- Ikon daftar pesanan -->
+                            <p>Kelola Order</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="<?= base_url('/manage_users') ?>" class="nav-link">
+                            <i class="nav-icon fas fa-users-cog"></i> <!-- Ikon user management -->
+                            <p>Manage User</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="<?= base_url('admin/withdrawals') ?>" class="nav-link">
+                            <i class="nav-icon fas fa-money-bill-wave"></i> <!-- Ikon pencairan dana -->
+                            <p>Manage Withdraw</p>
+                        </a>
+                    </li>
+
                 <?php endif; ?>
 
                 <!-- Inbox/Pesan Masuk -->

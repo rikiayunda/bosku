@@ -16,18 +16,29 @@ class ProductsController extends BaseController
 
     public function index()
     {
-        // echo "Controller ProductsController::index() berhasil diakses!";
-        // exit; 
-
-
-
+        $search = $this->request->getGet('search'); // Ambil data pencarian dari input GET
+    
+        if (!empty($search)) {
+            // Jika ada pencarian, filter data berdasarkan ID atau Nama Barang
+            $products = $this->productModel
+                ->like('id', $search)
+                ->orLike('name', $search)
+                ->findAll();
+        } else {
+            // Jika tidak ada pencarian, ambil semua produk
+            $products = $this->productModel->findAll();
+        }
+    
         $data = [
             'title' => 'Kelola Produk',
-            'products' => $this->productModel->findAll(),
+            'products' => $products,
+            'search' => $search, // Simpan nilai pencarian agar input tetap terisi
             'isi' => 'admin/products/index',
         ];
+    
         return view('layout/v_wrapper', $data);
     }
+    
 
     public function create()
     {

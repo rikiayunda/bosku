@@ -8,6 +8,18 @@
         <!-- Total Harga (Hidden) -->
         <input type="hidden" id="total_price_input" name="total_price">
 
+        <!-- Username Pembeli (Readonly) -->
+        <div class="mb-3">
+            <label>Nama Pembeli:</label>
+            <input type="text" class="form-control" value="<?= $user['username']; ?>" readonly>
+        </div>
+
+        <!-- Nama Produk (Readonly) -->
+        <div class="mb-3">
+            <label>Nama Produk:</label>
+            <input type="text" class="form-control" value="<?= $product['name']; ?>" readonly>
+        </div>
+
         <!-- Alamat Pengiriman -->
         <div class="mb-3">
             <label>Alamat Pengiriman:</label>
@@ -39,35 +51,12 @@
                 <?php endforeach; ?>
             </select>
         </div>
-        <div class="mb-3">
-            <label>ID Pesanan:</label>
-            <input type="number" name="order_id" class="form-control" value="<?= isset($order_id) ? $order_id : '' ?>" readonly>
-        </div>
 
         <!-- Total Harga -->
         <h4 class="mt-3">Total Harga: Rp <span id="total-price">0</span></h4>
-        
 
         <!-- Tombol Checkout -->
         <button type="submit" class="btn btn-primary">Checkout</button>
-    </form>
-
-    <!-- <hr> -->
-
-    <!-- <h4>Upload Bukti Pembayaran</h4>
-    <form action="<?= base_url('/checkout/upload-payment') ?>" method="post" enctype="multipart/form-data">
-        <?= csrf_field(); ?> -->
-        
-        <!-- ID Pesanan -->
-      
-
-        <!-- Upload Bukti Transfer -->
-        <!-- <div class="mb-3">
-            <label>Bukti Transfer:</label>
-            <input type="file" name="proof_of_payment" class="form-control" accept="image/*" required>
-        </div>
-
-        <button type="submit" class="btn btn-success">Upload</button> -->
     </form>
 </div>
 
@@ -76,32 +65,24 @@
 document.addEventListener("DOMContentLoaded", function () {
     let shippingDropdown = document.getElementById("shipping_id");
     let totalPriceSpan = document.getElementById("total-price");
-    let totalPriceInput = document.getElementById("total_price_input"); // Sesuaikan dengan name input hidden
-
+    let totalPriceInput = document.getElementById("total_price_input");
+    
     // Ambil harga produk dari PHP
     let productPrice = <?= $product['price']; ?>;
 
     function updateTotalPrice() {
         let shippingCost = 0;
         
-        // Pastikan ada opsi yang dipilih
         if (shippingDropdown.value) {
             shippingCost = parseFloat(shippingDropdown.options[shippingDropdown.selectedIndex].getAttribute("data-cost")) || 0;
         }
 
         let total = productPrice + shippingCost;
-        
-        // Perbarui tampilan harga
         totalPriceSpan.innerText = total.toLocaleString('id-ID');
-        
-        // Perbarui input hidden agar bisa terkirim ke backend
         totalPriceInput.value = total;
     }
 
-    // Panggil update harga saat pertama kali halaman dimuat
     updateTotalPrice();
-
-    // Update harga setiap kali ongkos kirim berubah
     shippingDropdown.addEventListener("change", updateTotalPrice);
 });
 </script>

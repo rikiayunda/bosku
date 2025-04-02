@@ -353,7 +353,7 @@ class Auth extends BaseController
                 ]);
 
                 session()->regenerate();
-                return redirect()->to(base_url('home'));
+                return redirect()->to(base_url('/'));
             } else {
                 session()->setFlashdata('pesan', 'Login gagal, periksa username atau password Anda.');
                 return redirect()->to(base_url('auth/login'))->withInput();

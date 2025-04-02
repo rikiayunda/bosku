@@ -53,6 +53,6 @@ class BankController extends Controller
     public function delete($id)
     {
         $this->bankAccountModel->delete($id);
-        return redirect()->to('/bank')->with('success', 'Rekening bank berhasil dihapus!');
+        return redirect()->to('admin/bank')->with('success', 'Rekening bank berhasil dihapus!');
     }
 }

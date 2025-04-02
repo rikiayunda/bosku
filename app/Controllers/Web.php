@@ -15,16 +15,25 @@ class Web extends BaseController
         // $this->replyModel = new ReplyModel(); // Tambahkan ini untuk menginisialisasi ReplyModel
     }
     public function index()
-    
-    {
-    //     $data = array(
-    //         'title'=>'Halaman Front End',
-    //         // 'isi' =>'v_web'
-    //     );
-    //     return view('V_web',$data);
-    // }
 
-    $messages = $this->messageModel->findAll();
-    return view('V_web', ['messages' => $messages]);
-}
+    {
+        //     $data = array(
+        //         'title'=>'Halaman Front End',
+        //         // 'isi' =>'v_web'
+        //     );
+        //     return view('V_web',$data);
+        // }
+
+        $messages = $this->messageModel->findAll();
+        return view('V_web', ['messages' => $messages]);
+    }
+
+    public function utama() {
+        $data= [
+            'title' =>  'Zona Belanja',
+            'isi' => 'Web'
+        ];
+        return view('layout/v_wrapper',$data);
+
+    }
 }

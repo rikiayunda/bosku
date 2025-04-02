@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\ProductModel;
 use App\Models\OrderModel;
+use App\Models\UserModel;
 use App\Models\OrderItemModel;
 use App\Models\ShippingRateModel;
 use App\Models\PaymentModel;
@@ -19,6 +20,9 @@ class Checkout extends BaseController
         if (!$user_id) {
             return redirect()->to('/login')->with('error', 'Silakan login terlebih dahulu.');
         }
+        // dd($user_id); 
+        $userModel = new \App\Models\UserModel(); // Pastikan ada model user
+        $user = $userModel->find($user_id);
 
         if (!$productId) {
             return redirect()->to('/')->with('error', 'Produk tidak ditemukan!');
@@ -27,6 +31,8 @@ class Checkout extends BaseController
         $productModel = new ProductModel();
         $shippingModel = new ShippingRateModel();
         $bankModel = new BankAccountModel();
+        $userModel = new UserModel();
+        // dd($user); 
 
         $product = $productModel->find($productId);
         if (!$product) {
@@ -42,6 +48,7 @@ class Checkout extends BaseController
 
         $data = [
             'title'          => 'Checkout',
+            'user'           => $user,
             'product'        => $product,
             'shipping_rates' => $shippingModel->findAll(),
             'bank_accounts'  => $bankModel->findAll(),
@@ -56,6 +63,13 @@ class Checkout extends BaseController
         $user_id = session()->get('user_id');
         if (!$user_id) {
             return redirect()->to('/login')->with('error', 'Silakan login terlebih dahulu.');
+        }
+
+        $userModel = new \App\Models\UserModel();
+        $user = $userModel->find($user_id); // Ambil data user berdasarkan user_id
+    
+        if (!$user) {
+            return redirect()->to('/checkout')->with('error', 'Data pengguna tidak ditemukan.');
         }
 
         $orderModel = new OrderModel();
@@ -79,13 +93,15 @@ class Checkout extends BaseController
 
         $orderModel->insert([
             'user_id'         => $user_id,
+            'username'        => $user['username'],
+            'product_id'      => array_key_first($cart), 
             'total_price'     => $final_total,
             'shipping_address' => $shipping_address,
             'shipping_cost'   => $shipping_cost,
             'bank_account_id' => $bank_account_id,
             'payment_status'  => 'pending',
         ]);
-        
+
         $order_id = $orderModel->insertID();
         foreach ($cart as $product_id => $item) {
             $orderItemModel->insert([
@@ -95,7 +111,7 @@ class Checkout extends BaseController
                 'price'      => $item['price'],
             ]);
         }
-        
+
         session()->remove('cart');
         return redirect()->to("/checkout/invoice/$order_id");
     }
@@ -141,7 +157,7 @@ class Checkout extends BaseController
         ];
 
         $html = view('checkout/invoice_pdf', $data);
-        
+
 
         $options = new Options();
         $options->set('defaultFont', 'Courier');
