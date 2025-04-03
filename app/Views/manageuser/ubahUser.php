@@ -41,7 +41,7 @@
                             <img id="photoPreview" src="<?= base_url('uploads/' . $user_get['photo'] ?? 'default.jpg') ?>" alt="Profile Photo" class="img-thumbnail" width="120">
                         </div>
                     </div>
-                    <!-- <div class="mb-3">
+                    <div class="mb-3">
                         <label for="skin" class="form-label">Skin</label>
                         <select name="skin" class="form-select" id="skin">
                             <option value="">Pilih Skin</option>
@@ -50,25 +50,25 @@
                             <option value="kuning" <?= ($user_get['skin'] == 'kuning') ? "selected" : "" ?>>Kuning</option>
                             <option value="black" <?= ($user_get['skin'] == 'black') ? "selected" : "" ?>>Hitam</option>
                         </select>
-                    </div> -->
-                    <!-- <div class="mb-3">
+                    </div>
+                    <div class="mb-3">
                         <label for="level" class="form-label">Level</label>
                         <input type="text" name="level" class="form-control" id="level" value="<?= esc($user_get['level'] ?? '') ?>" readonly>
-                    </div> -->
-                    <!-- <div class="mb-3">
+                    </div>
+                    <div class="mb-3">
                         <label for="status" class="form-label">Status</label>
                         <input type="text" name="status" class="form-control" id="status" value="<?= esc($user_get['status'] ?? '') ?>">
                         <small class="text-muted">*) Kosongkan jika tidak ingin diubah!</small>
                     </div>
                 </div>
-            </div> -->
+            </div>
 
             <!-- Password Section -->
-            <!-- <div class="mb-3">
+            <div class="mb-3">
                 <label for="password" class="form-label">New Password</label>
                 <input type="password" name="password" class="form-control" id="password" placeholder="Leave blank to keep current password">
                 
-            </div> -->
+            </div>
 
             <!-- Tombol Simpan -->
             <div class="text-end">

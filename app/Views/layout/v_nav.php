@@ -1,7 +1,7 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="<?= base_url() ?>" class="brand-link">
-        <img src="<?= base_url() ?>/template/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3">
+        <img src="<?= base_url() ?>/logo/logoZB.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3">
         <span class="brand-text font-weight-light">Zona Belanja</span>
     </a>
 
@@ -46,26 +46,45 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" role="menu" data-accordion="false">
                 <?php if (session()->get('level') == 3): ?>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a href="<?= base_url('dashboard') ?>" class="nav-link">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>Dashboard</p>
                         </a>
-                    </li>
+                    </li> -->
                     <li class="nav-item">
                         <a href="<?= base_url('home-pelanggan') ?>" class="nav-link">
-                            <i class="nav-icon fas fa-bullseye"></i> <!-- Ikon target untuk misi -->
-                            <p>Mission</p>
+                            <i class="nav-icon fas fa-shopping-cart"></i> <!-- Ikon keranjang belanja -->
+                            <p>Belanja</p>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="<?= base_url('withdrawal') ?>" class="nav-link">
-                            <i class="nav-icon fas fa-hand-holding-usd"></i> <!-- Ikon pencairan dana -->
+                            <i class="nav-icon fas fa-wallet"></i> <!-- Ikon dompet untuk tarik saldo -->
                             <p>Tarik Saldo</p>
                         </a>
                     </li>
-
+                    <li class="nav-item">
+                        <a href="<?= base_url('/referral') ?>" class="nav-link">
+                            <i class="nav-icon fas fa-user-friends"></i> <!-- Ikon jaringan orang untuk referral -->
+                            <p>Referral & Bonus</p>
+                        </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="<?= base_url('/panduan-faq') ?>" class="nav-link">
+                            <i class="nav-icon fas fa-question-circle"></i> <!-- Ikon tanda tanya untuk FAQ -->
+                            <p>Panduan & FAQ</p>
+                        </a>
+                    </li>
+                    <!-- <li class="nav-item">
+                        <a href="<?= base_url('/profile') ?>" class="nav-link">
+                            <i class="nav-icon fas fa-user-cog"></i> 
+                            <p>Profil</p>
+                        </a>
+                    </li> -->
+
+
+
 
                     <!-- <li class="nav-item">
                     <a href="<?= base_url('deposit') ?>" class="nav-link">

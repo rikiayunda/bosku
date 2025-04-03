@@ -165,3 +165,16 @@ $routes->post('/withdrawal/store', 'WithdrawalController::store');
     $routes->get('/admin/withdrawals/approve/(:num)', 'admin\WithdrawalController::approve/$1');
     $routes->post('/admin/withdrawals/uploadProof/(:num)', 'admin\WithdrawalController::uploadProof/$1');
     $routes->get('/admin/withdrawals/delete/(:num)', 'admin\WithdrawalController::delete/$1');
+
+
+    // $routes->group('referral', function ($routes) {
+        $routes->get('/referral', 'ReferralController::index');               // Menampilkan halaman Referral & Bonus
+        $routes->post('/send-invite', 'ReferralController::sendInvite'); // Mengirim undangan referral
+        $routes->post('/update-bonus', 'ReferralController::updateBonus'); // Memperbarui bonus komisi
+    // });
+    
+
+    $routes->get('/panduan-faq', 'FaqController::index');
+
+    $routes->get('/support-bantuan', 'SupportController::index');
+

@@ -273,14 +273,17 @@ class UserManagement extends BaseController
         }
     
         // Cek apakah ada file yang diunggah
-        $file = $this->request->getFile('photo');
-        if ($file && $file->isValid() && !$file->hasMoved()) {
+
+      
+
+        $filePhoto = $this->request->getFile('photo');
+        if ($filePhoto && $filePhoto->isValid() && !$filePhoto->hasMoved()) {
             // Tentukan nama file dan simpan ke folder public/uploads
-            $newFileName = $file->getRandomName();
-            $file->move(WRITEPATH . 'uploads', $newFileName);
+            $photoName = $filePhoto->getRandomName();
+            $filePhoto->move(FCPATH . 'photo', $photoName);
             
             // Tambahkan nama file ke dalam data
-            $data['photo'] = $newFileName;
+            $data['photo'] = $photoName;
         } else {
             // Jika tidak ada file yang diunggah, tetap gunakan foto saat ini
             $data['photo'] = $this->request->getPost('photo_current');

@@ -187,7 +187,6 @@ class Filters extends BaseFilters
 
 
 
-
                 // 'profile',  'profile/*',
                 //  '/profile/update',  'profile/update/*', 
 
@@ -239,8 +238,13 @@ class Filters extends BaseFilters
                 '/withdrawal/store',
 
 
-
-                
+                '/referral',
+                '/send-invite',
+                '/update-bonus',
+                '/panduan-faq',
+                '/support-bantuan',
+                '/peringkat-reward',
+                '/profile',
 
 
                 // Tambahkan akses ke checkout
